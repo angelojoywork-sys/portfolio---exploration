@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Angelo's Creative World</title>
+  <meta name="description" content="Portfolio of Angelo, a jack-of-all-trades designer. Pick a character to explore.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=DM+Sans:wght@400;500;700&family=Fredoka:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- Shared bits reused by every character -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <!-- Angelo's head: same face, hair and big nose in every role. Centred on 0,0. -->
+    <g id="head">
+      <path class="s" d="M-26,2 C-27,-20 -12,-30 2,-29 C20,-29 28,-14 26,4 C25,22 10,30 -2,29 C-16,28 -25,20 -26,2Z"/>
+      <path class="k" d="M-28,-2 C-32,-26 -8,-40 12,-33 C28,-28 32,-14 27,-4 C20,-16 6,-19 -8,-15 C-17,-12 -23,-8 -28,-2Z"/>
+      <circle class="k" cx="-9" cy="2" r="2.8"/>
+      <circle class="k" cx="9" cy="2" r="2.8"/>
+      <path d="M2,4 C12,8 14,15 5,16" style="stroke-width:4"/>
+      <path d="M-9,21 Q-4,24 1,22" style="stroke-width:3.5"/>
+    </g>
+  </defs>
+</svg>
+
+<main id="home" class="home">
+  <header class="intro">
+    <h1>Welcome to Angelo's creative world</h1>
+    <p class="choose">choose character</p>
+  </header>
+
+  <ul class="cast" role="list">
+
+    <!-- 1. Visual Designer -->
+    <li style="--i:0">
+      <button class="char-btn" type="button" data-role="visual" style="--c:var(--yellow);--d:0s">
+        <span class="bobber">
+          <svg class="char" viewBox="0 0 200 240" aria-hidden="true" focusable="false">
+            <g class="shape">
+              <path d="M88,148 L78,222 L62,225"/>
+              <path d="M112,148 L124,222 L140,225"/>
+              <path d="M82,94 C66,112 62,130 66,148"/>
+              <path d="M118,94 C134,88 146,74 150,62"/>
+              <path class="c" d="M80,88 C90,83 110,83 120,88 L122,148 C110,152 90,152 78,148Z"/>
+              <use href="#head" transform="translate(100 58)"/>
+              <g class="prop brush">
+                <path d="M146,70 L184,8"/>
+                <path class="c" d="M132,62 C140,56 156,62 156,76 C156,92 144,100 134,96 C128,86 126,70 132,62Z"/>
+              </g>
+              <g class="prop splash">
+                <circle class="c" cx="30" cy="70" r="9"/>
+                <circle class="c" cx="48" cy="38" r="6"/>
+                <circle class="c" cx="22" cy="110" r="5"/>
+              </g>
+            </g>
+          </svg>
+        </span>
+        <span class="label">Visual Designer</span>
+      </button>
+    </li>
+
+    <!-- 2. UX Designer -->
+    <li style="--i:1">
+      <button class="char-btn" type="button" data-role="ux" style="--c:var(--green);--d:-.5s">
+        <span class="bobber">
+          <svg class="char" viewBox="0 0 200 240" aria-hidden="true" focusable="false">
+            <g class="shape">
+              <path d="M88,148 L78,222 L62,225"/>
+              <path d="M112,148 L124,222 L140,225"/>
+              <path d="M82,94 C64,108 52,122 48,138"/>
+              <path d="M118,94 C130,104 136,112 140,118"/>
+              <path class="c" d="M80,88 C90,83 110,83 120,88 L122,148 C110,152 90,152 78,148Z"/>
+              <use href="#head" transform="translate(100 58) rotate(8)"/>
+              <g class="prop wire">
+                <rect class="w" x="14" y="128" width="56" height="44" rx="3"/>
+                <path d="M22,140 h22 M22,150 h38 M22,160 h14"/>
+                <rect class="c" x="46" y="136" width="16" height="10" rx="2"/>
+              </g>
+              <g class="prop notes">
+                <rect class="c" x="16" y="50" width="30" height="30" transform="rotate(-8 31 65)"/>
+                <path d="M22,62 h18 M22,72 h12" transform="rotate(-8 31 65)"/>
+                <rect class="c" x="150" y="150" width="26" height="26" transform="rotate(10 163 163)"/>
+              </g>
+              <g class="prop mag">
+                <path d="M146,112 L134,126"/>
+                <circle class="w" cx="156" cy="98" r="17"/>
+              </g>
+            </g>
+          </svg>
+        </span>
+        <span class="label">UX Designer</span>
+      </button>
+    </li>
+
+    <!-- 3. Design Engineer -->
+    <li style="--i:2">
+      <button class="char-btn" type="button" data-role="engineer" style="--c:var(--blue);--d:-1s">
+        <span class="bobber">
+          <svg class="char" viewBox="0 0 200 240" aria-hidden="true" focusable="false">
+            <g class="shape">
+              <path d="M92,152 L84,222 L68,225"/>
+              <path d="M110,152 L120,222 L136,225"/>
+              <path d="M80,98 C70,114 62,128 60,146"/>
+              <path d="M116,98 C126,112 130,128 128,146"/>
+              <path class="c" d="M78,92 C88,84 110,86 118,92 L122,152 C110,156 90,156 78,152Z"/>
+              <use href="#head" transform="translate(92 62) rotate(-8)"/>
+              <g class="prop laptop">
+                <path class="w" d="M56,110 L122,110 L130,150 L50,150Z"/>
+                <text class="k" x="90" y="137" text-anchor="middle" font-size="17" font-weight="700" font-family="ui-monospace, Menlo, Consolas, monospace">&lt;/&gt;</text>
+                <path class="c" d="M44,152 L136,152 L144,164 L36,164Z"/>
+              </g>
+              <g class="prop bubble">
+                <path class="w" d="M140,16 h42 a8,8 0 0 1 8,8 v20 a8,8 0 0 1 -8,8 h-26 l-12,12 v-12 h-4 a8,8 0 0 1 -8,-8 v-20 a8,8 0 0 1 8,-8z"/>
+                <text class="k" x="161" y="40" text-anchor="middle" font-size="15" font-weight="700" font-family="ui-monospace, Menlo, Consolas, monospace">&lt;/&gt;</text>
+              </g>
+              <g class="prop wrench">
+                <path d="M150,222 L168,208"/>
+                <circle class="c" cx="172" cy="205" r="6"/>
+              </g>
+            </g>
+          </svg>
+        </span>
+        <span class="label">Design Engineer</span>
+      </button>
+    </li>
+
+    <!-- 4. Motion Designer -->
+    <li style="--i:3">
+      <button class="char-btn" type="button" data-role="motion" style="--c:var(--violet);--d:-1.5s">
+        <span class="bobber">
+          <svg class="char" viewBox="0 0 200 240" aria-hidden="true" focusable="false">
+            <g class="shape">
+              <path d="M92,140 C80,170 64,190 48,206 L34,208"/>
+              <path d="M108,140 C120,170 136,190 152,206 L166,208"/>
+              <path d="M84,90 C60,80 40,60 28,34"/>
+              <path d="M116,90 C140,80 160,60 172,34"/>
+              <path class="c" d="M84,84 C92,80 108,80 116,84 L114,140 C106,144 94,144 86,140Z"/>
+              <use href="#head" transform="translate(100 54)"/>
+              <path class="trail" d="M30,196 C18,214 34,232 62,232"/>
+              <path class="trail" d="M170,196 C182,214 166,232 138,232"/>
+              <g class="prop play">
+                <circle class="w" cx="168" cy="140" r="16"/>
+                <path class="c" d="M163,131 L178,140 L163,149Z"/>
+              </g>
+            </g>
+          </svg>
+        </span>
+        <span class="label">Motion Designer</span>
+      </button>
+    </li>
+
+    <!-- 5. Video Editor -->
+    <li style="--i:4">
+      <button class="char-btn" type="button" data-role="video" style="--c:var(--red);--d:-2s">
+        <span class="bobber">
+          <svg class="char" viewBox="0 0 200 240" aria-hidden="true" focusable="false">
+            <g class="shape">
+              <path d="M88,148 L78,222 L62,225"/>
+              <path d="M112,148 L124,222 L140,225"/>
+              <path d="M82,94 C64,108 52,120 48,138"/>
+              <path d="M118,94 C132,100 140,108 142,114"/>
+              <path class="c" d="M80,88 C90,83 110,83 120,88 L122,148 C110,152 90,152 78,148Z"/>
+              <g class="prop scarf">
+                <path class="film" d="M100,90 C142,92 160,118 156,176"/>
+                <path class="holes" d="M100,90 C142,92 160,118 156,176"/>
+              </g>
+              <use href="#head" transform="translate(100 58)"/>
+              <path d="M72,56 C70,22 130,22 128,56" style="stroke-width:6"/>
+              <rect class="c" x="66" y="50" width="12" height="22" rx="5"/>
+              <rect class="c" x="122" y="50" width="12" height="22" rx="5"/>
+              <g class="prop scissors">
+                <path d="M48,138 L36,104 M48,138 L60,104"/>
+                <path d="M48,138 L38,152 M48,138 L58,152"/>
+                <circle class="c" cx="35" cy="158" r="7"/>
+                <circle class="c" cx="61" cy="158" r="7"/>
+              </g>
+            </g>
+          </svg>
+        </span>
+        <span class="label">Video Editor</span>
+      </button>
+    </li>
+
+    <!-- 6. Photographer -->
+    <li style="--i:5">
+      <button class="char-btn" type="button" data-role="photo" style="--c:var(--orange);--d:-2.5s">
+        <span class="bobber">
+          <svg class="char" viewBox="0 0 200 240" aria-hidden="true" focusable="false">
+            <g class="shape">
+              <path d="M88,148 L78,222 L62,225"/>
+              <path d="M112,148 L124,222 L140,225"/>
+              <path d="M82,94 C86,84 96,78 108,76"/>
+              <path d="M118,94 C132,92 140,84 140,76"/>
+              <path class="c" d="M80,88 C90,83 110,83 120,88 L122,148 C110,152 90,152 78,148Z"/>
+              <use href="#head" transform="translate(94 58) rotate(-4)"/>
+              <path d="M102,46 C80,46 74,80 98,92"/>
+              <g class="prop cam">
+                <rect class="c" x="108" y="38" width="14" height="8" rx="2"/>
+                <rect class="c" x="100" y="44" width="46" height="30" rx="5"/>
+                <circle class="w" cx="132" cy="59" r="10"/>
+              </g>
+              <g class="prop flash">
+                <path class="c" d="M168,28 L173,40 L186,42 L176,50 L180,64 L168,56 L156,64 L160,50 L150,42 L163,40Z"/>
+              </g>
+            </g>
+          </svg>
+        </span>
+        <span class="label">Photographer</span>
+      </button>
+    </li>
+
+  </ul>
+</main>
+
+<section id="role" class="role" hidden aria-labelledby="role-title">
+  <div class="stage" id="role-stage" style="--c:var(--yellow)"></div>
+  <h2 id="role-title" tabindex="-1"></h2>
+  <p class="soon">Work coming soon</p>
+  <button class="back" type="button" id="back">&larr; back to all characters</button>
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>

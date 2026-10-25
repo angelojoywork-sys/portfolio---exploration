@@ -1,0 +1,267 @@
+:root {
+  --paper: #EFEDE8;
+  --paper-2: #FBF9F4;
+  --ink: #1A1A1A;
+  --skin: #F2D3B0;
+  --yellow: #F2C230;
+  --green: #7DBF4B;
+  --red: #E4554B;
+  --blue: #4C7BE0;
+  --orange: #F28A3C;
+  --violet: #B26BD6;
+  --font-display: "Fredoka", "Trebuchet MS", system-ui, sans-serif;
+  --font-hand: "Caveat", "Segoe Print", "Bradley Hand", cursive;
+  --font-body: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: light;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100svh;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+}
+
+/* ---------- Home ---------- */
+.home, .role {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 16px;
+  text-align: center;
+}
+
+.home[hidden], .role[hidden] { display: none; }
+
+.intro { margin-bottom: clamp(24px, 5vw, 56px); }
+
+h1 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2.1rem, 6.2vw, 4.6rem);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+.choose {
+  margin: 12px 0 0;
+  font-family: var(--font-hand);
+  font-weight: 700;
+  font-size: clamp(1.7rem, 3.6vw, 2.5rem);
+  transform: rotate(-2deg);
+}
+
+.cast {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 1200px;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+}
+
+@media (max-width: 1000px) { .cast { grid-template-columns: repeat(3, 1fr); max-width: 640px; gap: 20px 12px; } }
+@media (max-width: 560px)  { .cast { grid-template-columns: repeat(2, 1fr); max-width: 400px; } }
+
+.char-btn {
+  all: unset;
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 4px 10px;
+  border-radius: 20px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  animation: pop .6s cubic-bezier(.3, 1.6, .5, 1) backwards;
+  animation-delay: calc(var(--i, 0) * 90ms);
+}
+
+.char-btn:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+  background: var(--paper-2);
+}
+
+.bobber {
+  display: block;
+  width: 100%;
+  transform-origin: 50% 100%;
+  animation: bob 3.2s ease-in-out infinite;
+  animation-delay: var(--d, 0s);
+}
+
+.char { display: block; width: 100%; height: auto; overflow: visible; }
+
+.label {
+  position: relative;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  padding-bottom: 4px;
+}
+
+/* wobbly underline squiggle on hover / focus */
+.label::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -4px;
+  height: 8px;
+  background: var(--c);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='8'%3E%3Cpath d='M0 4 Q4 0 8 4 T16 4' fill='none' stroke='black' stroke-width='2.5'/%3E%3C/svg%3E") repeat-x center / 16px 8px;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='8'%3E%3Cpath d='M0 4 Q4 0 8 4 T16 4' fill='none' stroke='black' stroke-width='2.5'/%3E%3C/svg%3E") repeat-x center / 16px 8px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .25s ease;
+}
+
+.char-btn:hover .label::after,
+.char-btn:focus-visible .label::after { transform: scaleX(1); }
+
+/* ---------- Character drawing ----------
+   Each .shape is drawn once in the HTML. script.js clones it into a
+   fill layer (nudged a few px, no outline) so the colour looks mis-registered. */
+.shape {
+  fill: none;
+  stroke: var(--stroke, var(--ink));
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  --sf: var(--skin);
+  --cf: var(--c);
+  --wf: var(--paper-2);
+  --kf: var(--ink);
+  --hf: var(--paper);
+}
+.fill-layer { --stroke: none; --kf: none; --hf: none; }
+.line-layer { --sf: none; --cf: none; --wf: none; }
+
+.s { fill: var(--sf); }
+.c { fill: var(--cf); }
+.w { fill: var(--wf); }
+.k { fill: var(--kf); stroke: none; }
+.trail { stroke-dasharray: 1 11; stroke-width: 6; }
+.film { stroke-width: 18; stroke-linecap: butt; }
+.holes { stroke: var(--hf); stroke-width: 7; stroke-dasharray: 5 8; stroke-linecap: butt; }
+
+.prop { transform-box: fill-box; transform-origin: center; }
+.brush   { transform-origin: 20% 90%; }
+.mag     { transform-origin: 20% 80%; }
+.scissors{ transform-origin: 50% 70%; }
+
+/* ---------- Hover behaviours ---------- */
+.char-btn:hover .char,
+.char-btn:focus-visible .char { animation: wiggle .7s ease-in-out; transform-origin: 50% 90%; }
+
+.char-btn:hover .brush,   .char-btn:focus-visible .brush   { animation: swing .5s ease-in-out infinite alternate; }
+.char-btn:hover .splash,  .char-btn:focus-visible .splash  { animation: throb .5s ease-in-out infinite alternate; }
+.char-btn:hover .mag,     .char-btn:focus-visible .mag     { animation: scan .7s ease-in-out infinite alternate; }
+.char-btn:hover .notes,   .char-btn:focus-visible .notes   { animation: flutter .4s ease-in-out infinite alternate; }
+.char-btn:hover .bubble,  .char-btn:focus-visible .bubble  { animation: throb .5s ease-in-out infinite alternate; }
+.char-btn:hover .wrench,  .char-btn:focus-visible .wrench  { animation: flutter .4s ease-in-out infinite alternate; }
+.char-btn:hover .play,    .char-btn:focus-visible .play    { animation: throb .45s ease-in-out infinite alternate; }
+.char-btn:hover .scarf,   .char-btn:focus-visible .scarf   { animation: flutter .5s ease-in-out infinite alternate; }
+.char-btn:hover .scissors,.char-btn:focus-visible .scissors{ animation: snip .35s ease-in-out infinite alternate; }
+.char-btn:hover .cam,     .char-btn:focus-visible .cam     { animation: flutter .5s ease-in-out infinite alternate; }
+.char-btn:hover .flash,   .char-btn:focus-visible .flash   { animation: throb .3s ease-in-out infinite alternate; }
+
+.char-btn.squash .bobber { animation: squash .35s ease-in-out forwards; }
+
+/* ---------- Role view ---------- */
+.role { gap: 8px; }
+
+.stage {
+  width: min(70vw, 340px);
+  animation: pop .5s cubic-bezier(.3, 1.6, .5, 1) backwards;
+}
+.stage .bobber { animation-duration: 2.6s; }
+
+.role h2 {
+  margin: 8px 0 0;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2rem, 6vw, 3.4rem);
+  line-height: 1.1;
+}
+.role h2:focus { outline: none; }
+
+.soon {
+  margin: 0;
+  font-family: var(--font-hand);
+  font-weight: 700;
+  font-size: clamp(1.7rem, 4vw, 2.3rem);
+  transform: rotate(-1.5deg);
+}
+
+.back {
+  all: unset;
+  box-sizing: border-box;
+  margin-top: 20px;
+  padding: 12px 22px;
+  border: 3px solid var(--ink);
+  border-radius: 999px;
+  background: var(--paper-2);
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: transform .15s ease, background .15s ease;
+}
+.back:hover { background: var(--c, var(--yellow)); transform: translateY(-2px) rotate(-1deg); }
+.back:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+
+.role:not([hidden]) > :not(.stage) { animation: fade .4s ease .15s backwards; }
+
+/* ---------- Keyframes ---------- */
+@keyframes pop {
+  from { opacity: 0; transform: translateY(24px) scale(.7); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes bob {
+  0%, 100% { transform: translateY(0) rotate(-1deg); }
+  50%      { transform: translateY(-6px) rotate(1deg); }
+}
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0); }
+  20% { transform: rotate(-5deg); }
+  40% { transform: rotate(4deg); }
+  60% { transform: rotate(-3deg); }
+  80% { transform: rotate(2deg); }
+}
+@keyframes swing   { from { transform: rotate(-12deg); } to { transform: rotate(14deg); } }
+@keyframes throb   { from { transform: scale(.92); }     to { transform: scale(1.14); } }
+@keyframes scan    { from { transform: translate(-4px, 3px) rotate(-6deg); } to { transform: translate(5px, -3px) rotate(6deg); } }
+@keyframes flutter { from { transform: rotate(-4deg) translateY(1px); } to { transform: rotate(4deg) translateY(-2px); } }
+@keyframes snip    { from { transform: scaleX(1); } to { transform: scaleX(.6); } }
+@keyframes squash {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.18, .8); }
+  100% { transform: scale(.85, 1.25) translateY(-14px); opacity: 0; }
+}
+@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+
+/* ---------- Reduced motion: no idle / wiggle, fades only ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .char-btn, .bobber, .stage, .prop, .char,
+  .char-btn:hover .char, .char-btn:focus-visible .char,
+  .char-btn.squash .bobber { animation: none !important; }
+  .char-btn { animation: fade .3s ease backwards !important; }
+  .role:not([hidden]) { animation: fade .3s ease; }
+  .label::after, .back { transition: none; }
+}
